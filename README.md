@@ -4,6 +4,8 @@ Python script to automate email sending using MySQL database connection
 
 This is a script which usses YAHOO SMTP server to send automatic emails to the emails listed in the database.
 **You can also use GMAIL SMTP server .. replace the host and port number**
+
+
 **Update: Now the email-body can be pulled from text file.**
 
 STEPS:
