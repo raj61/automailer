@@ -20,7 +20,8 @@ def getemail():
        # Fetch all the rows in a list of lists.
        results = cursor.fetchall()
        for row in results:
-          alist.append(row['email'])
+           #replace 1 with your column number of email coloumn.(optional)
+          alist.append(row[1])
       
     except:
        print "Error: unable to fecth data"
