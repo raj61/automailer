@@ -8,7 +8,6 @@ from email.MIMEImage import MIMEImage
 from email.mime.text import MIMEText
 from email import encoders
 import sys
-import MySQLdb
 from database import getemail
 from globalvar import EMAIL_SUBJECT
 from globalvar import EMAIL_SENDER
@@ -32,7 +31,21 @@ def send_email(pswd, emailr):
     msg['To'] = COMMASPACE.join(emailr)
     body = MIMEMultipart('alternative')
     #attach body of email from email-body.txt
-    body.attach(MIMEText(file("email-body.txt").read(), 'plain'))   
+    body.attach(MIMEText(file("email-body.txt").read(), 'plain'))
+
+    # We reference the image in the IMG SRC attribute by the ID we give it below
+    msgText = MIMEText('<br><img src="cid:image1"><br>', 'html')
+    body.attach(msgText)
+
+    # This example assumes the image is in the current directory
+    fp = open('test.jpg', 'rb')
+    msgImage = MIMEImage(fp.read())
+    fp.close()
+
+    # Define the image's ID as referenced above
+    msgImage.add_header('Content-ID', '<image1>')
+    msg.attach(msgImage)
+    
     msg.attach(body)
     #replace filename with your filename and data to the address of attacments
     attachments=[{'filename' : 'pdf.pdf', 'data' : file("pdf.pdf").read()},
